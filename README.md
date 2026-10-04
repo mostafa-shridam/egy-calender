@@ -217,28 +217,107 @@ flowchart TD
 
 ---
 
-## 🏗 Setup
+## 🏗 Run the App Locally
 
-1. **Clone the Repository**
+### Prerequisites
+
+Install the following before starting:
+
+- [Flutter](https://docs.flutter.dev/get-started/install) with Dart 3.7 or later
+- Android Studio and an Android emulator/device for Android development, or Xcode and an iOS simulator/device for iOS development
+- Xcode command-line tools and CocoaPods when building for iOS or macOS
+- A Firebase project with the required Authentication, Firestore, and Cloud Messaging configuration if you are using those features
+- A Supabase project and the API backend used by the app
+
+Verify the Flutter installation and available targets:
+
+```sh
+flutter doctor
+flutter devices
+```
+
+### First-time setup
+
+1. **Clone the repository**
+
    ```sh
    git clone https://github.com/mostafa-shridam/egy-calender.git
    cd egy-calender
    ```
-2. **Install Dependencies**
+
+2. **Install Dart/Flutter dependencies**
+
    ```sh
    flutter pub get
    ```
-3. **Configure secrets (required for a working local build)**
-   - Copy `lib/core/config/secrets.example.dart` to `lib/core/config/secrets.dart`.
-   - Fill in your API base URL and the Supabase **anon / publishable** key (never the `service_role` key).
-   - Firebase client files (`google-services.json`, `GoogleService-Info.plist`, `lib/firebase_options.dart`) are already in the repo and are public client config.
-   - Store a Gemini API key in the Firestore collection read by `GeminiService` (`Constants.gemini`). Protect that collection with Firestore Security Rules so it is not world-readable.
-4. **Run the App**
+
+3. **Create the local API configuration**
+
+   The app reads these values from Dart constants; it does not load `.env` at runtime:
+
+   ```sh
+   cp lib/core/config/secrets.example.dart lib/core/config/secrets.dart
+   ```
+
+   Edit `lib/core/config/secrets.dart` and set:
+
+   - `baseUrl`: the API base URL, including `/api`
+   - `supabaseUrl`: your Supabase project URL
+   - `supabaseAnonKey`: your Supabase anon/publishable key
+
+   Never put a Supabase `service_role` key in this Flutter app. `secrets.dart` is gitignored and must not be committed.
+
+4. **Generate localization and Riverpod code**
+
+   Run the project helper script:
+
+   ```sh
+   ./build.sh
+   ```
+
+   This regenerates localization keys and provider code. If macOS blocks the script, make it executable once with `chmod +x build.sh`.
+
+5. **Run on a connected device or emulator**
+
    ```sh
    flutter run
    ```
-5. **Android: Enable Exact Alarms**
-   - Ensure the device grants the `SCHEDULE_EXACT_ALARM` permission for full reminder functionality.
+
+   To select a specific target:
+
+   ```sh
+   flutter run -d chrome       # Web
+   flutter run -d <device-id> # Android, iOS, macOS, or Windows
+   ```
+
+### Firebase and feature configuration
+
+- Firebase client configuration is already included for the configured project: `android/app/google-services.json`, `ios/Runner/GoogleService-Info.plist`, and `lib/firebase_options.dart`. Replace these files with your own Firebase app configuration when using a different Firebase project.
+- Enable the Firebase services used by your environment: Authentication, Firestore, and Cloud Messaging.
+- Google Sign-In requires the provider to be enabled in Firebase Authentication. iOS also requires the reversed client ID URL scheme in `Info.plist`.
+- The Gemini API key is fetched at runtime from the Firestore collection referenced by `Constants.gemini`; add that document to your Firestore database and protect the collection with Security Rules.
+- The `.env.example` file documents the same API/Supabase values for reference only. It is not read by the app.
+
+### Platform notes
+
+- **Android:** grant `SCHEDULE_EXACT_ALARM` if reminders need exact timing. Home-screen widgets require adding the app's widget from the launcher.
+- **iOS:** run `cd ios && pod install && cd ..` after dependency changes. Google Sign-In and the home-screen widget require the corresponding native configuration.
+- **Web:** Firebase Hosting is configured to serve `build/web` and route all paths to `index.html`.
+
+### Build and deploy the web app
+
+To create and deploy a release web build:
+
+```sh
+./deploy.sh
+```
+
+The script cleans the project, installs dependencies, builds `build/web`, and runs `firebase deploy`. Make sure the Firebase CLI is installed and authenticated first:
+
+```sh
+npm install -g firebase-tools
+firebase login
+```
 
 ---
 
