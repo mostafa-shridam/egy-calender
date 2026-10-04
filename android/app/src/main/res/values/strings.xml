@@ -1,0 +1,7 @@
+<resources>
+    <string name="widget_description">اعرض أسعار العملات، الأخبار، أو فعالياتك المفضلة مباشرة على شاشتك.</string>
+    <string name="app_logo">App Logo</string>
+    <string name="egy_calender">Egy Calender</string>
+    <string name="todo">TODO</string>
+    <string name="no_events_for_now">No Events for now</string>
+</resources>

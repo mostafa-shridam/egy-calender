@@ -1,0 +1,55 @@
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "egy-calender",
+          "appId": "1:1018474349122:android:bcb6a618d304223aba63db",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "ios": {
+        "default": {
+          "projectId": "egy-calender",
+          "appId": "1:1018474349122:ios:9f84b57727a5548bba63db",
+          "uploadDebugSymbols": false,
+          "fileOutput": "ios/Runner/GoogleService-Info.plist"
+        }
+      },
+      "macos": {
+        "default": {
+          "projectId": "egy-calender",
+          "appId": "1:1018474349122:ios:9f84b57727a5548bba63db",
+          "uploadDebugSymbols": false,
+          "fileOutput": "macos/Runner/GoogleService-Info.plist"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "egy-calender",
+          "configurations": {
+            "android": "1:1018474349122:android:bcb6a618d304223aba63db",
+            "ios": "1:1018474349122:ios:9f84b57727a5548bba63db",
+            "macos": "1:1018474349122:ios:9f84b57727a5548bba63db",
+            "web": "1:1018474349122:web:2f88ab197b4e4583ba63db",
+            "windows": "1:1018474349122:web:db5af0cfaadf1332ba63db"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of '../settings.dart';
+
+// **************************************************************************
+// RiverpodGenerator
+// **************************************************************************
+
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint, type=warning
+
+@ProviderFor(SettingsNotifier)
+final settingsProvider = SettingsNotifierProvider._();
+
+final class SettingsNotifierProvider
+    extends $AsyncNotifierProvider<SettingsNotifier, SettingsStates> {
+  SettingsNotifierProvider._()
+    : super(
+        from: null,
+        argument: null,
+        retry: null,
+        name: r'settingsProvider',
+        isAutoDispose: true,
+        dependencies: null,
+        $allTransitiveDependencies: null,
+      );
+
+  @override
+  String debugGetCreateSourceHash() => _$settingsNotifierHash();
+
+  @$internal
+  @override
+  SettingsNotifier create() => SettingsNotifier();
+}
+
+String _$settingsNotifierHash() => r'419a3f822d1bdc9d452d76c28bc8618319afc669';
+
+abstract class _$SettingsNotifier extends $AsyncNotifier<SettingsStates> {
+  FutureOr<SettingsStates> build();
+  @$mustCallSuper
+  @override
+  WhenComplete runBuild() {
+    final ref = this.ref as $Ref<AsyncValue<SettingsStates>, SettingsStates>;
+    final element =
+        ref.element
+            as $ClassProviderElement<
+              AnyNotifier<AsyncValue<SettingsStates>, SettingsStates>,
+              AsyncValue<SettingsStates>,
+              Object?,
+              Object?
+            >;
+    return element.handleCreate(ref, build);
+  }
+}
