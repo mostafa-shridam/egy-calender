@@ -48,8 +48,15 @@ key.properties
 *.keystore
 *.p8
 *.p12
+*.pfx
+*.ppk
 *.pem
+*.key
+*.cer
+*.crt
+*.der
 *.mobileprovision
+*.provisionprofile
 **/serviceAccount*.json
 **/*-firebase-adminsdk*.json
 credentials.json
